@@ -1,0 +1,12 @@
+{
+  "name": "ServiceDesk",
+  "description": "A Service desk application",
+  "url": "https://github.com/lozjackson/servicedesk",
+  "options": {
+    "paths": [
+      "app"
+    ],
+    "exclude": "vendor",
+    "outdir":   "docs"
+  }
+}
