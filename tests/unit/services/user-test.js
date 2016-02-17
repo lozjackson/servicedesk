@@ -35,9 +35,9 @@ test('title should be an alias of model.title', function (assert) {
   assert.equal(service.get('title'), title);
 });
 
-test('email should be an alias of model.email', function (assert) {
+test('email should be an alias of model.eMail', function (assert) {
   var service = this.subject();
-  let email = service.get('model.email');
+  let email = service.get('model.eMail');
   assert.equal(service.get('email'), email);
 });
 

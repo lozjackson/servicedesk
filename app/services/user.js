@@ -58,7 +58,7 @@ export default Ember.Service.extend({
     @type {String}
     @readonly
   */
-  email: computed.readOnly('model.email'),
+  email: computed.readOnly('model.eMail'),
 
   /**
     Get the current user.
