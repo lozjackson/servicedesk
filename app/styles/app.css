@@ -1,0 +1,184 @@
+/*
+  Application
+*/
+
+body {
+  font-size: 16px;
+  font-family: sans-serif;
+  margin: 0px;
+  background: #efefef;
+}
+div.page-container {
+ 	position: relative;
+  left: 0;
+  margin-left: 0px;
+  top: 0;
+  bottom: 0;
+}
+div.user-log {
+  margin: 10px;
+  font-size: 12px;
+  position: relative;
+  right: 5px;
+  text-align: right;
+}
+h2 {
+  font-size: 18px;
+}
+h3 {
+  font-size: 16px;
+  margin: 10px 0 0;
+}
+div.align-right {
+  text-align: right;
+}
+div.panel {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 4px 4px 4px #888888;
+}
+
+/*
+  Buttons
+*/
+
+button {
+  width: 100px;
+  height: 35px;
+  margin: 10px;
+}
+button.save-button {
+  color: red;
+}
+div.save-cancel-buttons {
+  position: absolute;
+  right: 10px;
+}
+button.add-problem-description {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 20px;
+  margin: 10px;
+}
+
+/*
+  List styles
+*/
+
+ul {
+  list-style: none;
+  margin: 10px;
+  padding: 0px;
+}
+li.job {
+  margin: 5px;
+  padding: 15px;
+  background: #FFF;
+  border-radius: 4px;
+  box-shadow: 4px 4px 4px #888888;
+}
+div.list-detail {
+  font-size: 12px;
+}
+div.status-filter {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+
+/*
+  Job route styles
+*/
+div.job-details {
+  position: relative;
+  top: 50px;
+  margin: 15px;
+}
+div.job-details > h2
+div.job-details > div {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+div.job-details div.panel {
+  padding: 10px;
+  margin-bottom: 20px;
+}
+div.job-details div.panel > div {
+  margin: 5px 0;
+}
+
+div.job-details div.status-select {
+  top: 10px;
+  float: right;
+}
+
+/*
+  edit-panel component
+*/
+div.edit-panel {
+  width: 100%;
+  height: 300px;
+  bottom: 0;
+  position: fixed;
+  background: #fff;
+  box-shadow: 0px -5PX 5px #E2DEDE;
+}
+div.edit-panel button.close-button {
+  width: 60px;
+  height: 25px;
+  margin: 10px;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+div.edit-panel h3 {
+  margin: 10px;
+  font-size: 16px;
+  font-weight: normal;
+}
+div.edit-panel textarea {
+  width: calc(100% - 30px);
+  height: calc(100% - 75px);
+  margin: 10px;
+  resize: none;
+}
+
+/*
+  field-versions component
+*/
+
+ul.field-versions {
+  margin: 10px 0px;
+}
+ul.field-versions li {
+  margin: 10px 0px 25px;
+}
+div.version-editor {
+  font-size: 12px;
+}
+span.version-modified-time {
+  font-size: 10px;
+}
+
+/*
+  Media queries
+*/
+
+@media (min-width: 800px) {
+  div.page-container {
+    width: 800px;
+   	position: absolute;
+    left: 50%;
+    margin-left: -400px;
+  }
+  div.edit-panel {
+    width: 100%;
+    height: 300px;
+    bottom: 0;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #BBBBBB;
+    box-shadow: 0px -5PX 5px #E2DEDE;
+  }
+}
