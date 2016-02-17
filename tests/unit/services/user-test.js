@@ -1,11 +1,22 @@
 import { moduleFor, test } from 'ember-qunit';
+import Ember from 'ember';
 
 moduleFor('service:user', 'Unit | Service | user', {
-  // needs: ['service:foo']
 });
 
 test('init() method sets the model property with the current user', function (assert) {
+
   var service = this.subject();
+  service.set('spServices', Ember.Object.create({
+    getCurrentUser() {
+      return Ember.Object.create({
+        id: 10,
+        title: 'Test User',
+				email: 'test.user@example.com'
+			});
+    }
+  }));
+  service.init();
   let model = service.get('model');
   assert.equal(model.get('id'), 10);
   assert.equal(model.get('title'), 'Test User');
@@ -32,8 +43,17 @@ test('email should be an alias of model.email', function (assert) {
 
 test('getUser() method returns a user object', function (assert) {
   var service = this.subject();
+  service.set('spServices', Ember.Object.create({
+    getCurrentUser() {
+      return Ember.Object.create({
+        id: 10,
+        title: 'Test User',
+				email: 'test.user@example.com'
+			});
+    }
+  }));
   let user = service.getUser();
-  assert.equal(user.id, 10);
-  assert.equal(user.title, 'Test User');
-  assert.equal(user.email, 'test.user@example.com');
+  assert.equal(user.get('id'), 10);
+  assert.equal(user.get('title'), 'Test User');
+  assert.equal(user.get('email'), 'test.user@example.com');
 });

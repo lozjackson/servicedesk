@@ -2,7 +2,7 @@
   @module service-desk
 */
 import Ember from 'ember';
-import ENV from '../config/environment';
+// import ENV from '../config/environment';
 
 const computed = Ember.computed;
 
@@ -61,32 +61,14 @@ export default Ember.Service.extend({
   email: computed.readOnly('model.email'),
 
   /**
-    The current user is returned.
+    Get the current user.
 
     @method getUser
     @private
     @return {Object}
   */
   getUser() {
-    if (ENV.environment === 'production') {
-      // call the SPGetCurrentUser function to get the current user from SharePoint
-			var userObject = Ember.$().SPServices.SPGetCurrentUser({
-				fieldNames: ["Id", "Title", 'EMail']
-			});
-
-			// return an object with a single property, the `user` model, with data
-      // from the userObject created above
-			return Ember.Object.create({
-        id: userObject.Id,
-        title: userObject.Title,
-				email: userObject.EMail
-			});
-    } else {
-      return Ember.Object.create({
-        id: 10,
-        title: 'Test User',
-				email: 'test.user@example.com'
-			});
-    }
+    if (!this.spServices) { return; }
+    return this.spServices.getCurrentUser();
   }
 });

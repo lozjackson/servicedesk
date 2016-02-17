@@ -6,6 +6,7 @@ export function initialize() {
   application.inject('route', 'user', 'service:user');
   application.inject('controller', 'user', 'service:user');
   application.inject('component', 'user', 'service:user');
+  application.inject('service:user', 'spServices', 'service:sp-services');
 }
 
 export default {
