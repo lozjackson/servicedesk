@@ -65,7 +65,10 @@ button.add-problem-description {
 /*
   List styles
 */
-
+div.jobs-list {
+  position: relative;
+  top: 30px;
+}
 ul {
   list-style: none;
   margin: 10px;
@@ -83,8 +86,13 @@ div.list-detail {
 }
 div.status-filter {
   position: absolute;
-  top: 10px;
+  top: 30px;
   left: 15px;
+}
+div.search-bar {
+  position: absolute;
+  top: 30px;
+  right: 15px;
 }
 
 /*
@@ -169,6 +177,7 @@ span.version-modified-time {
   div.page-container {
     width: 800px;
    	position: absolute;
+    /*top: 0px;*/
     left: 50%;
     margin-left: -400px;
   }

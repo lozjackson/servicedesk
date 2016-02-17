@@ -7,6 +7,9 @@
     {{/each}}
   </select>
 </div>
+<div class="search-bar">
+  {{input type="search" value=search placeholder="Search..."}}
+</div>
 <div class="jobs-list">
   <ul>
     {{#each filteredJobs as |job|}}
