@@ -4,7 +4,7 @@
 import OdataSerializer from 'ember-odata/serializers/odata';
 
 /**
-  @class JobSerializer
+  @class PersonSerializer
   @namespace Serializers
 */
 export default OdataSerializer.extend({
