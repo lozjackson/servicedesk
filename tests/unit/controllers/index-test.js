@@ -111,7 +111,7 @@ test('sortedJobs', function (assert) {
   assert.equal(controller.get('sortedJobs.firstObject'), job2);
 });
 
-test('filteredJobs', function (assert) {
+test('filterByStatus', function (assert) {
   let controller = this.subject();
   let store = this.store;
   let job1, job2, assignee;
@@ -127,14 +127,47 @@ test('filteredJobs', function (assert) {
     job2.get('assignedTo').pushObject(assignee);
   });
   assert.equal(controller.get('myJobs.length'), 2);
-  assert.equal(controller.get('filteredJobs.length'), 1);
+  assert.equal(controller.get('filterByStatus.length'), 1);
 
   run(() => job2.set('statusValue', 'Active'));
-  assert.equal(controller.get('filteredJobs.length'), 2);
+  assert.equal(controller.get('filterByStatus.length'), 2);
 
   run(() => job1.set('statusValue', 'Closed'));
-  assert.equal(controller.get('filteredJobs.length'), 1);
+  assert.equal(controller.get('filterByStatus.length'), 1);
 
   run(() => job2.set('statusValue', 'Closed'));
-  assert.equal(controller.get('filteredJobs.length'), 0);
+  assert.equal(controller.get('filterByStatus.length'), 0);
+});
+
+test('filteredJobs', function (assert) {
+  let controller = this.subject();
+  let store = this.store;
+  let job1, job2, assignee;
+  let model = Ember.A();
+  controller.set('user', {email: 'test@example.com'});
+  controller.set('model', model);
+  run(() => {
+    job1 = store.createRecord('job', { title: 'Abc', statusValue: 'Active', _modified: 1 });
+    job2 = store.createRecord('job', { title: 'def', statusValue: 'Active', _modified: 2 });
+    model.pushObjects([job1, job2]);
+    assignee = store.createRecord('person', {workEMail: 'test@example.com'});
+    job1.get('assignedTo').pushObject(assignee);
+    job2.get('assignedTo').pushObject(assignee);
+  });
+  assert.equal(controller.get('myJobs.length'), 2);
+  // assert.equal(controller.get('filteredJobs.length'), 1);
+
+  // run(() => job2.set('statusValue', 'Active'));
+  assert.equal(controller.get('filteredJobs.length'), 2);
+  let filteredJobs;
+  run(() => {
+    controller.set('search', 'ab');
+    filteredJobs = controller.get('filteredJobs');
+  });
+  assert.equal(filteredJobs.get('length'), 1);
+  assert.equal(filteredJobs.get('firstObject'), job1);
+
+  run(() => controller.set('search', 'de'));
+  assert.equal(controller.get('filteredJobs.length'), 1);
+  assert.equal(controller.get('filteredJobs.firstObject'), job2);
 });

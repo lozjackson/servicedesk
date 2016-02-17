@@ -31,6 +31,12 @@ export default Ember.Controller.extend({
   model: null,
 
   /**
+    @property search
+    @type {String}
+  */
+  search: null,
+
+  /**
     ## Query Params
 
     @property queryParams
@@ -85,17 +91,39 @@ export default Ember.Controller.extend({
   jobSortProperties: ['_modified:desc'],
 
   /**
+    Computed Property
+
     @property sortedJobs
     @type {Array}
   */
   sortedJobs: computed.sort('myJobs', 'jobSortProperties'),
 
   /**
+    Computed Property
+
+    Filter by `status`
+
+    @property filterByStatus
+    @type {Array}
+  */
+  filterByStatus: computed('sortedJobs.@each.status', 'status', function () {
+    let { sortedJobs, status } = this.getProperties('sortedJobs', 'status');
+    return sortedJobs.filterBy('status', status);
+  }),
+
+  /**
+    Computed Property
+
+    Filter by `search` string
+
     @property filteredJobs
     @type {Array}
   */
-  filteredJobs: computed('sortedJobs.@each.status', 'status', function () {
-    let { sortedJobs, status } = this.getProperties('sortedJobs', 'status');
-    return sortedJobs.filterBy('status', status);
+  filteredJobs: computed('filterByStatus.@each.title', 'search', function () {
+    let { filterByStatus, search } = this.getProperties('filterByStatus', 'search');
+    if (!search) { return filterByStatus; }
+    return filterByStatus.filter(function (item) {
+      return item.get('title').toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
   })
 });
