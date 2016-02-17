@@ -2,6 +2,7 @@
   @module service-desk
 */
 import Ember from 'ember';
+import FieldVersionObject from 'ember-spservices/objects/field-version';
 
 const computed = Ember.computed;
 
@@ -9,7 +10,7 @@ const computed = Ember.computed;
   @class FieldVersionObject
   @namespace Models
 */
-export default Ember.Object.extend({
+export default FieldVersionObject.extend({
 
   /**
     @property store
@@ -17,73 +18,6 @@ export default Ember.Object.extend({
     @private
   */
   store: null,
-
-  /**
-    ## Value
-
-    This will
-    @property value
-    @type {Any}
-  */
-  value: null,
-
-  /**
-    ## Modified
-
-    When the version was modified.
-
-    This is a string with a timestamp.  ie. `2015-11-13T10:20:02Z`
-
-    @property modified
-    @type {String}
-  */
-  modified: null,
-
-  /**
-    ## Editor
-
-    The editor is a string in the following format
-
-    ```
-    '11;#Test User,#DOMAIN\testuser,#test.user@example.com,#,#Test User'
-    ```
-
-    @property editor
-    @type {String}
-  */
-  editor: null,
-
-  /**
-    Computed Property.
-
-    A Date object - When the version was modified
-
-    @property _modified
-    @type {Object}
-  */
-  _modified: computed('modified', function () {
-    let modified = this.get('modified');
-    return new Date(modified).getTime();
-  }),
-
-  /**
-    Computed Property.
-    
-    The `id` of the version editor.
-
-    @property _editorId
-    @type {Integer}
-  */
-  _editorId: computed('editor', function () {
-    let editor = this.get('editor');
-    if (editor) {
-      let array = editor.split(';#');
-      if (array.length) {
-        return array[0];
-      }
-    }
-    return;
-  }),
 
   /**
     Computed property
