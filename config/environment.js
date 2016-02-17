@@ -6,6 +6,9 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+    baseURL: '/IT/SitePages/jobs',
+    locationType: 'hash',
+    namespace: 'IT/_vti_bin/listdata.svc',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -25,6 +28,13 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.baseURL = '/';
+    ENV.host = 'http://localhost';
+    ENV.namespace = 'odata/server.php';
+    ENV.contentSecurityPolicy = {
+      'connect-src': "'self' http://localhost",
+      'style-src': "'self' 'unsafe-inline'"
+    }
   }
 
   if (environment === 'test') {
