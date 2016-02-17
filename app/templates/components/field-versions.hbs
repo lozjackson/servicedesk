@@ -1,0 +1,10 @@
+{{#each sortedVersions as |version|}}
+  <li>
+    <div class="version-editor">
+      {{version._editor.name}} (<span class="version-modified-time">{{moment-format version._modified 'D/M/Y h:mm'}}</span>):
+    </div>
+    <div>
+      {{{version.value}}}
+    </div>
+  </li>
+{{/each}}
