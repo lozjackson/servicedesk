@@ -1,1 +1,29 @@
+<div class="status-filter">
+  <select onchange={{action (mut status) value="target.value"}}>
+    {{#each statusOptions as |option|}}
+      <option value={{option}} selected={{is-equal status option}}>
+        {{option}}
+      </option>
+    {{/each}}
+  </select>
+</div>
+<div class="jobs-list">
+  <ul>
+    {{#each filteredJobs as |job|}}
+      <li class="job">
+        <h3>
+          {{#link-to "job" job}}
+            {{job.title}}
+          {{/link-to}}
+        </h3>
+        <div class="list-detail">
+          Requester:
+          {{#each job.requester as |person|}}
+            {{person.name}}
+          {{/each}}
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>
 {{outlet}}
