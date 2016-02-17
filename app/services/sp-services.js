@@ -2,6 +2,7 @@
   @module service-desk
 */
 import Ember from 'ember';
+import SpServicesService from 'ember-spservices/services/sp-services';
 import ENV from '../config/environment';
 import FieldVersionObject from 'servicedesk/models/field-version';
 
@@ -57,7 +58,7 @@ function createFieldVersion(store, value, modified) {
   @class SpServicesService
   @namespace Services
 */
-export default Ember.Service.extend({
+export default SpServicesService.extend({
 
   /**
     @property store
@@ -74,27 +75,6 @@ export default Ember.Service.extend({
     @private
   */
   _SPServices: (ENV.environment === 'production') ? Ember.$().SPServices : SPServices,
-
-  /**
-    ## GetCurrentUser
-
-    Get the current user.
-
-    @method getCurrentUser
-    @return {Object}
-  */
-  getCurrentUser() {
-    let _SPServices = this.get('_SPServices');
-    if (!_SPServices) { return; }
-    let currentUser =  _SPServices.SPGetCurrentUser({
-      fieldNames: ["Id", "Title", 'EMail']
-    });
-    return Ember.Object.create({
-      id: currentUser.Id,
-      title: currentUser.Title,
-      email: currentUser.EMail
-    });
-  },
 
   /**
     ## GetVersionCollection
@@ -115,29 +95,20 @@ export default Ember.Service.extend({
     @param {Array} versionCollection
   */
   getVersionCollection(strlistID, strlistItemID, strFieldName, versionCollection) {
-    let {_SPServices, store} = this.getProperties('_SPServices', 'store');
+    let store = this.get('store');
     if (ENV.environment === 'development') {
       versionCollection.pushObject(createFieldVersion(store, 'abc', '2015-11-03T10:20:02Z'));
       versionCollection.pushObject(createFieldVersion(store, 'def', '2015-11-10T10:20:02Z'));
     } else {
-      if (!_SPServices || !strlistID || !strlistItemID || !strFieldName) { return; }
-      _SPServices({
-        operation: "GetVersionCollection",
-        async: true,
-        strlistID: strlistID,
-        strlistItemID: strlistItemID,
-        strFieldName: strFieldName,
-        completefunc: function (xData /*, Status*/) {
-          Ember.$(xData.responseText).find("Version").each(function(/*i*/) {
-            versionCollection.pushObject(FieldVersionObject.create({
-              store: store,
-              // [ Ember.String.camelize(strFieldName) ]: Ember.$(this).attr(strFieldName),
-              value: Ember.$(this).attr(strFieldName),
-              modified: Ember.$(this).attr("Modified"),
-              editor: Ember.$(this).attr("Editor")
-            }));
-          });
-        }
+      this._super(strlistID, strlistItemID, strFieldName, function (xData) {
+        Ember.$(xData.responseText).find("Version").each(function(/*i*/) {
+          versionCollection.pushObject(FieldVersionObject.create({
+            store: store,
+            value: Ember.$(this).attr(strFieldName),
+            modified: Ember.$(this).attr("Modified"),
+            editor: Ember.$(this).attr("Editor")
+          }));
+        });
       });
     }
   }

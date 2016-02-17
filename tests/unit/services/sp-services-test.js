@@ -10,16 +10,18 @@ test('it exists', function(assert) {
 });
 
 test('getCurrentUser() method', function(assert) {
-  assert.expect(8);
+  assert.expect(10);
   var service = this.subject();
   service.set('_SPServices', {
     SPGetCurrentUser: (obj) => {
-      assert.equal(obj.fieldNames.length, 3);
-      assert.equal(obj.fieldNames[0], 'Id');
-      assert.equal(obj.fieldNames[1], 'Title');
-      assert.equal(obj.fieldNames[2], 'EMail');
+      assert.equal(obj.fieldNames.length, 4);
+      assert.equal(obj.fieldNames[0], 'ID');
+      assert.equal(obj.fieldNames[1], 'Name');
+      assert.equal(obj.fieldNames[2], 'Title');
+      assert.equal(obj.fieldNames[3], 'EMail');
       return {
-        Id: 10,
+        ID: 10,
+        Name: `DOMAIN\Test.User`,
         Title: 'Test User',
 				EMail: 'test.user@example.com'
 			};
@@ -29,8 +31,9 @@ test('getCurrentUser() method', function(assert) {
   let user = service.getCurrentUser();
   assert.ok(service);
   assert.equal(user.get('id'), 10);
+  assert.equal(user.get('name'), `DOMAIN\Test.User`);
   assert.equal(user.get('title'), 'Test User');
-  assert.equal(user.get('email'), 'test.user@example.com');
+  assert.equal(user.get('eMail'), 'test.user@example.com');
 });
 
 test('getVersionCollection() method', function(assert) {
