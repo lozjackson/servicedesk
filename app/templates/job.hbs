@@ -1,1 +1,57 @@
+<div class="button-goback" {{action "gotoIndex"}}>
+  {{svg-triangle direction="left" size="18"}}
+</div>
+<div class="save-cancel-buttons">
+  <button class={{unless saveDisabled 'save-button'}} disabled={{saveDisabled}} {{action "save"}}>
+    Save
+  </button>
+  <button disabled={{cancelDisabled}} {{action "cancel"}}>
+    Cancel
+  </button>
+</div>
+<div class="job-details">
+  <div class="panel">
+
+    <div class="status-select">
+      <select onchange={{action (mut model.statusValue) value="target.value"}}>
+        {{#each statusOptions as |option|}}
+          <option value={{option}} selected={{is-equal model.statusValue option}}>
+            {{option}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
+    <h2>
+      {{model.title}}
+    </h2>
+    <div>
+      AssignedTo:
+      {{#each model.assignedTo as |person|}}
+        {{person.name}}
+      {{/each}}
+    </div>
+    <div>
+      Requester:
+      {{#each model.requester as |person|}}
+        {{person.name}}
+      {{/each}}
+    </div>
+  </div>
+  <div class="panel">
+    Notes:
+    <button class="add-problem-description" {{action "addProblemDescription"}}>+</button>
+    <div>
+      {{{model.problemDescription}}}
+    </div>
+    {{field-versions
+      model=model
+      fieldName="Comment"
+      listName="Service Desk Log"}}
+  </div>
+</div>
+{{#if showEditPanel}}
+  {{edit-panel
+    value=model.problemDescription
+    close="closeProblemDescription"}}
+{{/if}}
 {{outlet}}
