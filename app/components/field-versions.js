@@ -82,6 +82,17 @@ export default Ember.Component.extend({
   listName: null,
 
   /**
+    If this property is true the component is in the loading state.  It enters
+    this state when it asks the `SpServicesService` for data and remains in this 
+    state until the service provides the requested data.
+
+    @property isLoading
+    @type {Boolean}
+    @private
+  */
+  isLoading: false,
+
+  /**
     ## Version Sort Properties
 
     @property versionSortProperties
@@ -135,7 +146,6 @@ export default Ember.Component.extend({
     this._super(...arguments);
     this.set('versionCollection', []);
     this.getVersionCollection();
-    // Ember.Logger.log('versionCollection', this.get('versionCollection'));
   },
 
   /**
@@ -148,6 +158,7 @@ export default Ember.Component.extend({
   getVersionCollection() {
     let {spServices, listName, itemId, fieldName, versionCollection} = this.getProperties('spServices', 'listName', 'itemId', 'fieldName', 'versionCollection');
     if (!spServices) { return; }
-    spServices.getVersionCollection(listName, itemId, fieldName, versionCollection);
+    this.set('isLoading', true);
+    spServices.getVersionCollection(listName, itemId, fieldName, versionCollection, () => this.set('isLoading', false));
   }
 });

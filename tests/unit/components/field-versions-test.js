@@ -41,6 +41,13 @@ test('init() method should call getVersionCollection() method', function(assert)
   assert.equal(component.get('versionCollection.length'), 0);
 });
 
+test('isLoading should be false', function(assert) {
+  assert.expect(1);
+  var component = this.subject();
+  this.render();
+  assert.equal(component.get('isLoading'), false);
+});
+
 test('versionSortProperties', function(assert) {
   assert.expect(2);
   var component = this.subject();
@@ -96,6 +103,37 @@ test('getVersionCollection() method', function(assert) {
         assert.equal(itemId, 1);
         assert.equal(fieldName, 'Comment');
         assert.equal(typeof versionCollection, 'object');
+        versionCollection.pushObject({});
+      }
+    });
+    component.getVersionCollection();
+  });
+  assert.equal(component.get('versionCollection.length'), 1);
+});
+
+test('getVersionCollection() method should set isLoading property', function(assert) {
+  assert.expect(7);
+  var component = this.subject();
+  this.render();
+  run(() => {
+    component.setProperties({
+      isLoading: false,
+      listName: 'Test List',
+      model: Ember.Object.create({id: 1}),
+      fieldName: 'Comment'
+    });
+    component.set('spServices', {
+      getVersionCollection: (listName, itemId, fieldName, versionCollection, callback) => {
+        assert.equal(listName, 'Test List');
+        assert.equal(itemId, 1);
+        assert.equal(fieldName, 'Comment');
+        assert.equal(typeof versionCollection, 'object');
+        assert.equal(component.get('isLoading'), true, `'isLoading' should be true`);
+
+        if (typeof callback === 'function') {
+          run(() => callback.call(this, {}, 'success'));
+          assert.equal(component.get('isLoading'), false, `'isLoading' should be false`);
+        }
         versionCollection.pushObject({});
       }
     });

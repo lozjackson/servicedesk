@@ -1,10 +1,21 @@
-{{#each sortedVersions as |version|}}
+{{#if isLoading}}
   <li>
-    <div class="version-editor">
-      {{version._editor.name}} (<span class="version-modified-time">{{moment-format version._modified 'D/M/Y h:mm'}}</span>):
-    </div>
-    <div>
-      {{{version.value}}}
+    <div class="loading">
+      <div class="message">
+        Loading notes, please wait...
+      </div>
+      <div class="spinner"></div>
     </div>
   </li>
-{{/each}}
+{{else}}
+  {{#each sortedVersions as |version|}}
+    <li>
+      <div class="version-editor">
+        {{version._editor.name}} (<span class="version-modified-time">{{moment-format version._modified 'D/M/Y h:mm'}}</span>):
+      </div>
+      <div>
+        {{{version.value}}}
+      </div>
+    </li>
+  {{/each}}
+{{/if}}
