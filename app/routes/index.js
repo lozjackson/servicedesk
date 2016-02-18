@@ -16,6 +16,7 @@ export default Ember.Route.extend({
     @return {Array}
   */
   model() {
-    return this.store.findAll('job');
+    let id = this.get('user.id');
+    return id ? this.store.query('job', { $filter: `AssignedTo/Id eq ${id}`}) : this.store.findAll('job');
   }
 });
