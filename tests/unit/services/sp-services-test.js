@@ -37,11 +37,12 @@ test('getCurrentUser() method', function(assert) {
 });
 
 test('getVersionCollection() method', function(assert) {
-  assert.expect(8);
+  assert.expect(9);
   var service = this.subject();
   let listName = 'testList';
   let itemId = 1;
   let fieldName = 'fieldName';
+  let callback = () => assert.ok(true);
   let versionCollection = [];
   let xml = `<Version>
     <Comment>Abc</Comment>
@@ -62,7 +63,7 @@ test('getVersionCollection() method', function(assert) {
     });
   });
 
-  service.getVersionCollection(listName, itemId, fieldName, versionCollection);
+  service.getVersionCollection(listName, itemId, fieldName, versionCollection, callback);
   assert.ok(service);
   assert.equal(versionCollection.length, 1, `should be 1 version`);
   // assert.equal(versionCollection.objectAt(0).get('comment'), 'Abc');
