@@ -18,6 +18,7 @@ div.page-container {
 div.user-log {
   margin: 10px;
   font-size: 12px;
+  color: #aaa;
   position: relative;
   right: 5px;
   text-align: right;
@@ -167,6 +168,25 @@ div.version-editor {
 }
 span.version-modified-time {
   font-size: 10px;
+}
+
+/*
+  Loading
+*/
+div.loading {
+  margin: 25px auto;
+}
+
+div.loading .message {
+  text-align: center;
+  color: #aaa;
+  margin-bottom: 25px;
+}
+div.loading .spinner {
+  background: url('/assets/images/ajax-loader.gif') no-repeat;
+  height: 31px;
+  width: 31px;
+  margin: 0 auto;
 }
 
 /*
