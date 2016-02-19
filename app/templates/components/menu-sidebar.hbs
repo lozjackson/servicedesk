@@ -1,0 +1,20 @@
+<input id="toggle" type="checkbox" class="menu-toggle"><label for="toggle">&equiv;</label>
+<div class="content">
+  {{yield}}
+</div>
+<div class="slide-menu">
+  <h1>Menu</h1>
+  <nav class="menu">
+    <li><a href="#">Jobs</a></li>
+    <li><a href="#">...</a></li>
+  </nav>
+  <div class="user-log">
+    Logged in as: {{user.title}}
+  </div>
+  <div class="settings">
+    <h2>Settings:</h2>
+    <div>
+      {{input type="checkbox"}} Checkbox
+    </div>
+  </div>
+</div>
