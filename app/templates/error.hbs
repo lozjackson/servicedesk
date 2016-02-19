@@ -1,0 +1,16 @@
+<div class="error">
+  <div class="message">
+    <h1>Something went wrong!...</h1>
+    <h2> Sorry about that... Please try again later.</h2>
+    {{#if model.errors}}
+      <ul>
+        {{#each model.errors as |error|}}
+          <li>
+            <h3>{{error.title}}</h3>
+            <p>{{error.detail}}</p>
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+</div>
