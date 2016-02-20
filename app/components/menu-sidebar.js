@@ -2,20 +2,12 @@
   @module service-desk
 */
 import Ember from 'ember';
-import { storageFor } from 'ember-local-storage';
 
 /**
   @class MenuSidebarComponent
   @namespace Components
 */
 export default Ember.Component.extend({
-
-  /**
-    @property jobConfig
-    @type {Object}
-    @private
-  */
-  jobConfig: storageFor('job'),
 
   /**
     @property classNames

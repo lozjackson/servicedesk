@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import { initialize } from '../../../initializers/user';
+import { initialize } from '../../../initializers/config';
 import { module, test } from 'qunit';
 
 var registry, application;
 
-module('Unit | Initializer | user', {
+module('Unit | Initializer | config', {
   beforeEach: function() {
     Ember.run(function() {
       application = Ember.Application.create();
