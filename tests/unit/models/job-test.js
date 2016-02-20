@@ -56,12 +56,32 @@ test('assignedToEmailArray', function(assert) {
     });
   });
   assert.equal(model.get('assignedToEmailArray.length'), 0, `'assignedToEmailArray.length' should be 0`);
-  assert.equal(model.get('assignedToEmailArray'), '', `'assignedToEmailArray' should be empty string`);
 
   run(() => model.get('assignedTo').pushObject(assignee1));
   assert.equal(assignedTo.get('length'), 1, `'assignedTo.length' should be '1'`);
   assert.equal(model.get('assignedToEmailArray.length'), 1, `'assignedToEmailArray.length' should be 1`);
 });
+
+test('requesterEmailArray', function(assert) {
+  let model = this.subject();
+  let store = this.store();
+  let requester = model.get('requester');
+  let requester1, requester2;
+  run(() => {
+    requester1 = store.createRecord('person', {
+      workEMail: 'test1@domain.com'
+    });
+    requester2 = store.createRecord('person', {
+      workEMail: 'test2@domain.com'
+    });
+  });
+  assert.equal(model.get('requesterEmailArray.length'), 0, `'requesterEmailArray.length' should be 0`);
+
+  run(() => model.get('requester').pushObject(requester1));
+  assert.equal(requester.get('length'), 1, `'requester.length' should be '1'`);
+  assert.equal(model.get('requesterEmailArray.length'), 1, `'requesterEmailArray.length' should be 1`);
+});
+
 
 test('assignedToEmail', function(assert) {
   let model = this.subject();
@@ -83,5 +103,28 @@ test('assignedToEmail', function(assert) {
   assert.equal(model.get('assignedToEmail'), 'test1@domain.com', `'assignedToEmail' should be 'test1@domain.com'`);
 
   run(() => assignedTo.pushObject(assignee2));
-  assert.equal(model.get('assignedToEmail'), 'test1@domain.com; test2@domain.com', `'assignedToEmail' should be 'test1@domain.com; test2@domain.com'`);
+  assert.equal(model.get('assignedToEmail'), 'test1@domain.com;test2@domain.com', `'assignedToEmail' should be 'test1@domain.com;test2@domain.com'`);
+});
+
+test('requesterEmail', function(assert) {
+  let model = this.subject();
+  let store = this.store();
+  let requester = model.get('requester');
+  let requester1, requester2;
+  run(() => {
+    requester1 = store.createRecord('person', {
+      workEMail: 'test1@domain.com'
+    });
+    requester2 = store.createRecord('person', {
+      workEMail: 'test2@domain.com'
+    });
+  });
+  assert.equal(model.get('requesterEmail'), '', `'requesterEmail' should be empty string`);
+
+  run(() => requester.pushObject(requester1));
+  assert.equal(requester.get('length'), 1, `'requester.length' should be '1'`);
+  assert.equal(model.get('requesterEmail'), 'test1@domain.com', `'requesterEmail' should be 'test1@domain.com'`);
+
+  run(() => requester.pushObject(requester2));
+  assert.equal(model.get('requesterEmail'), 'test1@domain.com;test2@domain.com', `'requesterEmail' should be 'test1@domain.com;test2@domain.com'`);
 });

@@ -84,17 +84,41 @@ export default DS.Model.extend({
   assignedToEmailArray: computed.mapBy('assignedTo', 'workEMail'),
 
   /**
+    An array of email addresses mapped from the `requester` array.
+
+    @property requesterEmailArray
+    @type {Array}
+    @private
+  */
+  requesterEmailArray: computed.mapBy('requester', 'workEMail'),
+
+  /**
     A string containing the email addresses of all assignees of the job.  Each
     email address is separated by a semicolon.
 
     ```
-    one@domain.com; two@example.com
+    one@domain.com;two@example.com
     ```
 
     @property assignedToEmail
     @type {String}
   */
   assignedToEmail: computed('assignedToEmailArray.[]', function () {
-    return this.get('assignedToEmailArray').join('; ');
-  })
+    return this.get('assignedToEmailArray').join(';');
+  }),
+
+  /**
+    A string containing the email addresses of all requesters of the job.  Each
+    email address is separated by a semicolon.
+
+    ```
+    one@domain.com;two@example.com
+    ```
+
+    @property requesterEmail
+    @type {String}
+  */
+  requesterEmail: computed('requesterEmailArray.[]', function () {
+    return this.get('requesterEmailArray').join(';');
+  }),
 });
