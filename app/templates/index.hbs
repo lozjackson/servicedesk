@@ -1,3 +1,6 @@
+<header>
+  <h1>Service Desk : {{status}}</h1>
+</header>
 <div class="status-filter">
   <select onchange={{action (mut status) value="target.value"}}>
     {{#each statusOptions as |option|}}
