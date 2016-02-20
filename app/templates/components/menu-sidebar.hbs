@@ -1,20 +1,49 @@
-<input id="toggle" type="checkbox" class="menu-toggle"><label for="toggle">&equiv;</label>
+{{input id="menu-toggle-button" type="checkbox" checked=menuOpen class="menu-toggle"}}
+<label for="menu-toggle-button">&equiv;</label>
 <div class="content">
   {{yield}}
 </div>
 <div class="slide-menu">
-  <h1>Menu</h1>
-  <nav class="menu">
-    <li><a href="#">Jobs</a></li>
-    <li><a href="#">...</a></li>
-  </nav>
-  <div class="user-log">
-    Logged in as: {{user.title}}
-  </div>
-  <div class="settings">
-    <h2>Settings:</h2>
-    <div>
-      {{input type="checkbox"}} Checkbox
+  <header>
+    <div class="user-log">
+      Logged in as: {{user.title}}
     </div>
-  </div>
+  </header>
+  <nav class="menu">
+    <li><div class="menu-button-index" {{action 'gotoIndex'}}>Jobs</div></li>
+    <li>
+      <div {{action 'toggleShowSettings'}}>
+        {{#if showSettings}}
+          Hide
+        {{/if}}
+        Settings
+      </div>
+    </li>
+  </nav>
+  {{#if showSettings}}
+    <div class="settings">
+      <h2>Settings:</h2>
+      <div>
+        When Saving:
+        <ul>
+          <li>
+            {{checkbox-slider
+              checked=jobConfig.closeEditPanelOnSave
+              checkboxId="close-edit-panel-button"}}
+            <label for="close-edit-panel-button">
+              Close Edit panel
+            </label>
+          </li>
+          <li>
+            {{checkbox-slider
+              checked=jobConfig.gotoIndexOnSave
+              checkboxId="goto-index-button"}}
+            <label for="goto-index-button">
+              Goto jobs list
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  {{/if}}
 </div>
