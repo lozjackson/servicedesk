@@ -2,6 +2,7 @@
   @module service-desk
 */
 import Ember from 'ember';
+import { storageFor } from 'ember-local-storage';
 
 const computed = Ember.computed;
 
@@ -10,6 +11,18 @@ const computed = Ember.computed;
   @namespace Controllers
 */
 export default Ember.Controller.extend({
+
+  /**
+    ## Job Config
+
+    This is a localStorage object that is saved on the user's machine.  Any properties
+    set on this object will be persisted, but will be specific to the user's machine.
+
+    @property jobConfig
+    @type {Object}
+    @private
+  */
+  jobConfig: storageFor('job'),
 
   /**
     @property showEditPanel
@@ -113,15 +126,21 @@ export default Ember.Controller.extend({
   },
 
   /**
-    Save the model and close the edit panel
+    Save the model, close the edit panel and transition to Index.
 
     @method _save
     @private
   */
   _save() {
     let model = this.get('model');
+    let jobConfig = this.get('jobConfig');
     model.save();
-    this._closeEditPanel();
+    if (jobConfig.get('closeEditPanelOnSave')) {
+      this._closeEditPanel();
+    }
+    if (jobConfig.get('gotoIndexOnSave')) {
+      this._gotoIndex();
+    }
   },
 
   /**

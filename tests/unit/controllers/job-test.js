@@ -6,14 +6,14 @@ const run = Ember.run;
 moduleFor('controller:job', {
   needs: [
     'model:job',
-    'model:person'
+    'model:person',
+    'storage:job'
   ],
   beforeEach: function () {
       this.inject.service('store', { as: 'store' });
   }
 });
 
-// Replace this with your real tests.
 test('it exists', function(assert) {
   var controller = this.subject();
   assert.ok(controller);
@@ -147,16 +147,64 @@ test('_closeEditPanel() method', function(assert) {
 });
 
 test('_save() method', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
   let controller = this.subject();
+  controller.set('_gotoIndex', () => {});
   controller.set('model', Ember.Object.create({
     save() {
       assert.ok(true);
     }
   }));
+  controller._save();
+});
+
+test('_save() method - closeEditPanelOnSave false', function(assert) {
+  assert.expect(1);
+  let controller = this.subject();
+  controller.set('_gotoIndex', () => {});
+  controller.set('jobConfig.closeEditPanelOnSave', false);
+  controller.set('model', Ember.Object.create({
+    save() {}
+  }));
+  controller.set('showEditPanel', true);
+  controller._save();
+  assert.equal(controller.get('showEditPanel'), true, `'showEditPanel' should be true`);
+});
+
+test('_save() method - closeEditPanelOnSave true', function(assert) {
+  assert.expect(1);
+  let controller = this.subject();
+  controller.set('_gotoIndex', () => {});
+  controller.set('jobConfig.closeEditPanelOnSave', true);
+  controller.set('model', Ember.Object.create({
+    save() {}
+  }));
   controller.set('showEditPanel', true);
   controller._save();
   assert.equal(controller.get('showEditPanel'), false, `'showEditPanel' should be false`);
+});
+
+test('_save() method - gotoIndexOnSave false', function(assert) {
+  assert.expect(1);
+  let controller = this.subject();
+  controller.set('jobConfig.gotoIndexOnSave', false);
+  controller.set('model', Ember.Object.create({
+    save() {}
+  }));
+  controller.set('_gotoIndex()', () => assert.ok(false));
+  controller._save();
+  assert.ok(controller);
+});
+
+test('_save() method - gotoIndexOnSave true', function(assert) {
+  assert.expect(1);
+  let controller = this.subject();
+  controller.set('jobConfig.gotoIndexOnSave', true);
+  controller.set('model', Ember.Object.create({
+    save() {}
+  }));
+  controller.set('_gotoIndex', () => assert.ok(true));
+  controller._save();
 });
 
 test('_cancel() method should rollback attributes', function(assert) {
