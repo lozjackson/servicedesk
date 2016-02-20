@@ -1,7 +1,10 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
-
 const run = Ember.run;
+
+const Config = Ember.Object.extend({
+  job: Ember.Object.create()
+});
 
 moduleFor('controller:job', {
   needs: [
@@ -10,7 +13,7 @@ moduleFor('controller:job', {
     'storage:job'
   ],
   beforeEach: function () {
-      this.inject.service('store', { as: 'store' });
+    this.inject.service('store', { as: 'store' });
   }
 });
 
@@ -41,7 +44,6 @@ test('statusOptions should be an array', function(assert) {
 
 test('saveDisabled should be true', function(assert) {
   let controller = this.subject();
-  // let store = this.store;
   let job;
   run(() => {
     job = Ember.Object.create({hasDirtyAttributes: false});//store.createRecord('job');
@@ -162,6 +164,7 @@ test('_save() method - closeEditPanelOnSave false', function(assert) {
   assert.expect(1);
   let controller = this.subject();
   controller.set('_gotoIndex', () => {});
+  controller.set('config', Config.create());
   controller.set('jobConfig.closeEditPanelOnSave', false);
   controller.set('model', Ember.Object.create({
     save() {}
@@ -175,6 +178,7 @@ test('_save() method - closeEditPanelOnSave true', function(assert) {
   assert.expect(1);
   let controller = this.subject();
   controller.set('_gotoIndex', () => {});
+  controller.set('config', Config.create());
   controller.set('jobConfig.closeEditPanelOnSave', true);
   controller.set('model', Ember.Object.create({
     save() {}
@@ -187,6 +191,7 @@ test('_save() method - closeEditPanelOnSave true', function(assert) {
 test('_save() method - gotoIndexOnSave false', function(assert) {
   assert.expect(1);
   let controller = this.subject();
+  controller.set('config', Config.create());
   controller.set('jobConfig.gotoIndexOnSave', false);
   controller.set('model', Ember.Object.create({
     save() {}
@@ -199,6 +204,7 @@ test('_save() method - gotoIndexOnSave false', function(assert) {
 test('_save() method - gotoIndexOnSave true', function(assert) {
   assert.expect(1);
   let controller = this.subject();
+  controller.set('config', Config.create());
   controller.set('jobConfig.gotoIndexOnSave', true);
   controller.set('model', Ember.Object.create({
     save() {}
