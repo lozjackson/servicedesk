@@ -4,10 +4,11 @@ A Service desk application.
 
 ## Dependencies
 
-* ember-svg-shapes
+* ember-local-storage
+* ember-moment
 * ember-odata
 * ember-spservices
-  - jQuery.SPServices
+* ember-svg-shapes
 
 ## Prerequisites
 
