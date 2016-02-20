@@ -4,6 +4,10 @@
 import StorageObject from 'ember-local-storage/local/object';
 
 /**
+  ## Job Config
+
+  This storage object is for the jobs page to store config settings.
+
   @class JobStorage
   @namespace Storages
 */
