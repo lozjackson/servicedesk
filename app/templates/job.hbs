@@ -35,9 +35,13 @@
     </div>
     <div>
       Requester:
-      {{#each model.requester as |person|}}
-        {{person.name}}
-      {{/each}}
+      {{#if model.requesterEmail}}
+        <a href="mailto:{{model.requesterEmail}}">
+          {{#each model.requester as |person|}}
+            {{person.name}}
+          {{/each}}
+        </a>
+      {{/if}}
     </div>
   </div>
   <div class="panel">
