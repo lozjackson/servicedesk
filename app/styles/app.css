@@ -341,7 +341,7 @@ nav.menu {
   box-shadow: inset 0px 1px 1px #475059;
 }
 .slide-menu .settings div li {
-  margin: 20px 0;
+  margin: 0;
   vertical-align: middle;
 }
 .slide-menu .settings > div > ul > li > label {
