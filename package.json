@@ -37,6 +37,7 @@
     "ember-data": "2.3.0",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
+    "ember-local-storage": "1.1.0",
     "ember-moment": "6.0.0",
     "ember-odata": "git+https://github.com/lozjackson/ember-odata.git",
     "ember-spservices": "git+https://github.com/lozjackson/ember-spservices.git",
