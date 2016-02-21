@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember server",
+    "start": "ember server --proxy http://localhost",
     "test": "ember test"
   },
   "repository": "https://github.com/lozjackson/servicedesk",
