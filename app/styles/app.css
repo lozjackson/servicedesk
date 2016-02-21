@@ -48,6 +48,9 @@ div.panel {
   border-radius: 4px;
   box-shadow: 4px 4px 4px #888888;
 }
+select, input {
+  font-size: 12px;
+}
 
 /*
   Buttons
@@ -246,6 +249,7 @@ input[type=checkbox].menu-toggle {
 /*input[type=checkbox].menu-toggle ~ */
 label[for=menu-toggle-button] {
   position: absolute;
+  margin: 0;
   top: 0px;
   right: 10px;
   z-index: 1;
