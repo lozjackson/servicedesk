@@ -13,7 +13,7 @@
   </button>
 </div>
 <div class="job-details">
-  <div class="panel">
+  <div class="panel {{if model.hasDirtyAttributes (if saveDisabled 'red' 'yellow') 'green'}} top-border">
 
     <div class="status-select">
       {{select-box
