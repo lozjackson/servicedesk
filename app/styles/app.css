@@ -1,12 +1,18 @@
 /*
   Application
 */
-
+html, body {
+  overflow-x: hidden;
+}
 body {
-  font-size: 16px;
-  font-family: sans-serif;
+  position: relative;
   margin: 0px;
   background: #efefef;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+a, a:visited {
+  color: #275CBD;
 }
 div.content {
   left: 0;
@@ -31,7 +37,6 @@ h1 {
   margin-top: 20px;
   margin-left: 15px;
   color: #54555F;
-  /*text-shadow: 1px 1px 1px #000;*/
 }
 h2 {
   font-size: 18px;
@@ -50,6 +55,15 @@ div.panel {
 }
 select, input {
   font-size: 12px;
+}
+.top-border.yellow {
+  border-top: 4px solid rgb(236, 207, 101);
+}
+.top-border.green {
+  border-top: 4px solid rgb(123, 224, 123);
+}
+.top-border.red {
+  border-top: 4px solid rgb(251, 189, 189);
 }
 
 /*
@@ -99,7 +113,7 @@ li.job {
   padding: 15px;
   background: #FFF;
   border-radius: 4px;
-  box-shadow: 4px 4px 4px #888888;
+  box-shadow: 4px 4px 4px rgba(136, 136, 136, 0.69);
 }
 div.list-detail {
   font-size: 12px;
@@ -126,7 +140,7 @@ div.search-bar {
 div.job-details {
   position: relative;
   top: 80px;
-  margin: 15px;
+  margin: 5px;
 }
 div.job-details > h2
 div.job-details > div {
@@ -135,6 +149,7 @@ div.job-details > div {
 }
 div.job-details div.panel {
   padding: 10px;
+  margin: 10px;
   margin-bottom: 20px;
 }
 div.job-details div.panel > div {
@@ -267,8 +282,6 @@ input[type=checkbox].menu-toggle:checked ~ label {
   position: absolute;
   width:100%;
   min-height: 100%;
-  /*padding: 40px;*/
-  /*background: #f2f2f2;*/
   transform: translate3d(0, 0, 0);
   transition: transform .4s;
 }
@@ -294,10 +307,6 @@ input[type=checkbox].menu-toggle:checked ~ .slide-menu .menu li {
 .slide-menu header {
   height: 50px;
 }
-/*.slide-menu nav {
-  position: relative;
-  top: 50px;
-}*/
 .slide-menu h1 {
   margin: 10px;
   margin-top: 25px;
