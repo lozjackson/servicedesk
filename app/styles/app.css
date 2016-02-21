@@ -48,22 +48,8 @@ h3 {
 div.align-right {
   text-align: right;
 }
-div.panel {
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 4px 4px 4px #888888;
-}
 select, input {
   font-size: 12px;
-}
-.top-border.yellow {
-  border-top: 4px solid rgb(236, 207, 101);
-}
-.top-border.green {
-  border-top: 4px solid rgb(123, 224, 123);
-}
-.top-border.red {
-  border-top: 4px solid rgb(251, 189, 189);
 }
 
 /*
@@ -142,20 +128,9 @@ div.job-details {
   top: 80px;
   margin: 5px;
 }
-div.job-details > h2
-div.job-details > div {
-  margin-bottom: 10px;
-  padding: 10px;
-}
-div.job-details div.panel {
-  padding: 10px;
-  margin: 10px;
-  margin-bottom: 20px;
-}
 div.job-details div.panel > div {
   margin: 5px 0;
 }
-
 div.job-details div.status-select {
   top: 10px;
   float: right;
