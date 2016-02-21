@@ -16,13 +16,9 @@
   <div class="panel">
 
     <div class="status-select">
-      <select onchange={{action (mut model.statusValue) value="target.value"}}>
-        {{#each statusOptions as |option|}}
-          <option value={{option}} selected={{is-equal model.statusValue option}}>
-            {{option}}
-          </option>
-        {{/each}}
-      </select>
+      {{select-box
+        selected=model.statusValue
+        options=statusOptions}}
     </div>
     <h2>
       {{model.title}}

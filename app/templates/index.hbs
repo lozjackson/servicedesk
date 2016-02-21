@@ -2,13 +2,7 @@
   <h1>Service Desk : {{status}}</h1>
 </header>
 <div class="status-filter">
-  <select onchange={{action (mut status) value="target.value"}}>
-    {{#each statusOptions as |option|}}
-      <option value={{option}} selected={{is-equal status option}}>
-        {{option}}
-      </option>
-    {{/each}}
-  </select>
+  {{select-box selected=status options=statusOptions}}
 </div>
 <div class="search-bar">
   {{input type="search" value=search placeholder="Search..."}}
