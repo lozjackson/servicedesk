@@ -9,13 +9,13 @@ test('it exists', function(assert) {
   assert.ok(adapter);
 });
 
-test('queryStringParams', function(assert) {
-  let adapter = this.subject();
-  let queryStringParams = adapter.get('queryStringParams');
-  assert.equal(queryStringParams.length, 2);
-  assert.equal(queryStringParams[0], '$select=Id,Modified,Title,StatusValue,ProblemDescription,AssignedTo/Id,Requester/Id');
-  assert.equal(queryStringParams[1], '$expand=AssignedTo,Requester');
-});
+// test('queryStringParams', function(assert) {
+//   let adapter = this.subject();
+//   let queryStringParams = adapter.get('queryStringParams');
+//   assert.equal(queryStringParams.length, 2);
+//   assert.equal(queryStringParams[0], '$select=Id,Modified,Title,StatusValue,ProblemDescription,AssignedTo/Id,Requester/Id');
+//   assert.equal(queryStringParams[1], '$expand=AssignedTo,Requester');
+// });
 
 test('pathForType() method', function(assert) {
   let adapter = this.subject();

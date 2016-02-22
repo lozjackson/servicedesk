@@ -14,15 +14,6 @@ const get = Ember.get;
 export default ApplicationAdapter.extend({
 
   /**
-    @property queryStringParams
-    @type {Array}
-  */
-  queryStringParams: [
-    '$select=Id,Modified,Title,StatusValue,ProblemDescription,AssignedTo/Id,Requester/Id',
-    '$expand=AssignedTo,Requester'
-  ],
-
-  /**
     @method ajaxOptions
     @private
     @param {String} url
