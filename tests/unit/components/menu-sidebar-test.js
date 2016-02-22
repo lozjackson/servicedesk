@@ -6,7 +6,7 @@ const run = Ember.run;
 moduleForComponent('menu-sidebar', 'Unit | Component | menu sidebar', {
   needs: [
     'storage:job',
-    'component:checkbox-slider'
+    'component:check-box'
   ],
   unit: true
 });
