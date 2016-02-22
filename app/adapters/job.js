@@ -13,14 +13,34 @@ const get = Ember.get;
 */
 export default ApplicationAdapter.extend({
 
+  query: function(store, type, query) {
+    let params = [];
+    let keys;
+    var url = this.buildURL(type.modelName, null, null, 'query', query);
+
+    if (this.sortQueryParams) {
+      query = this.sortQueryParams(query);
+    }
+
+    keys = Object.keys(query);
+    if (keys.length) {
+      keys.forEach(function (key) {
+        params.push(`${key}=${encodeURI(query[key])}`);
+      });
+      url += (url.indexOf('?') === -1) ? '?':'&';
+      url += params.join('&');
+    }
+    return this.ajax(url, 'GET');
+  },
+
   /**
     @property queryStringParams
     @type {Array}
   */
-  queryStringParams: [
-    '$select=Id,Modified,Title,StatusValue,ProblemDescription,AssignedTo/Id,Requester/Id',
-    '$expand=AssignedTo,Requester'
-  ],
+  // queryStringParams: [
+  //   '$select=Id,Modified,Title,StatusValue,ProblemDescription,AssignedTo/Id,Requester/Id',
+  //   '$expand=AssignedTo,Requester'
+  // ],
 
   /**
     @method ajaxOptions
