@@ -68,7 +68,7 @@ export default Ember.Controller.extend({
     @property saveDisabled
     @type {Boolean}
   */
-  saveDisabled: computed('model.hasDirtyAttributes', 'model.problemDescription', 'problemDescriptionRequired', function () {
+  saveDisabled: computed('model.hasDirtyAttributes', 'model.newProblemDescription', 'problemDescriptionRequired', function () {
     return (this.get('model.hasDirtyAttributes') && this.checkProblemDescription()) ? false : true;
   }),
 
@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
     @return {Boolean}
   */
   checkProblemDescription() {
-    if (this.get('problemDescriptionRequired') && !this.get('model.problemDescription')) {
+    if (this.get('problemDescriptionRequired') && !this.get('model.newProblemDescription')) {
       this.set('showEditPanel', true);
       return false;
     }
@@ -136,7 +136,11 @@ export default Ember.Controller.extend({
   _save() {
     let model = this.get('model');
     let jobConfig = this.get('jobConfig');
+
+    model.set('problemDescription', model.get('newProblemDescription'));
+    model.set('newProblemDescription', null);
     model.save();
+
     if (jobConfig) {
       if (jobConfig.get('closeEditPanelOnSave')) {
         this._closeEditPanel();
@@ -146,6 +150,7 @@ export default Ember.Controller.extend({
       }
     }
   },
+
 
   /**
     Cancel - call `rollbackAttributes` on the model and close the edit panel

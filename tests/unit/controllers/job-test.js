@@ -79,7 +79,7 @@ test('saveDisabled - problemDescriptionRequired true', function(assert) {
   run(() => controller.set('model.hasDirtyAttributes', true));
   assert.equal(controller.get('saveDisabled'), true);
 
-  run(() => controller.set('model.problemDescription', 'abc'));
+  run(() => controller.set('model.newProblemDescription', 'abc'));
   assert.equal(controller.get('saveDisabled'), false);
 });
 
@@ -121,7 +121,7 @@ test('checkProblemDescription() method - problemDescriptionRequired true', funct
   assert.equal(controller.checkProblemDescription(), false);
   assert.equal(controller.get('showEditPanel'), true, `'showEditPanel' should be true`);
 
-  run(() => controller.set('model.problemDescription', 'abc', `'showEditPanel' should be true`));
+  run(() => controller.set('model.newProblemDescription', 'abc', `'showEditPanel' should be true`));
   assert.equal(controller.checkProblemDescription(), true);
 });
 
@@ -149,15 +149,19 @@ test('_closeEditPanel() method', function(assert) {
 });
 
 test('_save() method', function(assert) {
-  assert.expect(1);
+  assert.expect(3);
   let controller = this.subject();
   controller.set('_gotoIndex', () => {});
   controller.set('model', Ember.Object.create({
+    problemDescription: null,
+    newProblemDescription: 'abc',
     save() {
       assert.ok(true);
     }
   }));
   controller._save();
+  assert.equal(controller.get('model.problemDescription'), 'abc', `'problemDescription' should be 'abc'`);
+  assert.equal(controller.get('model.newProblemDescription'), null, `'newProblemDescription' should be null`);
 });
 
 test('_save() method - closeEditPanelOnSave false', function(assert) {
