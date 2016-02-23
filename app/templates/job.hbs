@@ -43,9 +43,6 @@
   <div class="panel">
     Notes:
     <button class="add-problem-description" {{action "addProblemDescription"}}>+</button>
-    <div>
-      {{{model.problemDescription}}}
-    </div>
     {{field-versions
       model=model
       fieldName="Comment"
@@ -54,7 +51,7 @@
 </div>
 {{#if showEditPanel}}
   {{edit-panel
-    value=model.problemDescription
+    value=model.newProblemDescription
     close="closeProblemDescription"}}
 {{/if}}
 {{outlet}}
