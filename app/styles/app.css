@@ -198,7 +198,7 @@ div.error .message {
   margin-bottom: 25px;
 }
 div.loading .spinner {
-  background: url('/assets/images/ajax-loader.gif') no-repeat;
+  background: url('images/ajax-loader.gif') no-repeat;
   height: 31px;
   width: 31px;
   margin: 0 auto;
