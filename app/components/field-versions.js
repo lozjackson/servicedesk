@@ -83,7 +83,7 @@ export default Ember.Component.extend({
 
   /**
     If this property is true the component is in the loading state.  It enters
-    this state when it asks the `SpServicesService` for data and remains in this 
+    this state when it asks the `SpServicesService` for data and remains in this
     state until the service provides the requested data.
 
     @property isLoading
@@ -147,6 +147,10 @@ export default Ember.Component.extend({
     this.set('versionCollection', []);
     this.getVersionCollection();
   },
+
+  // reload: Ember.observer('model.problemDescription', function() {
+  //   Ember.run.debounce(this, this.getVersionCollection, 500);
+  // }),
 
   /**
     This method gets the version collection using the `SPServices` `GetVersionCollection`
