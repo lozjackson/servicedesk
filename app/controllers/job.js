@@ -56,7 +56,7 @@ export default Ember.Controller.extend({
     'Active',
     'Awaiting External Action',
     'Solution in Test',
-    'Complete',
+    'Completed',
     'Closed'
   ],
 

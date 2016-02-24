@@ -38,7 +38,7 @@ test('statusOptions should be an array', function(assert) {
   assert.equal(controller.get('statusOptions')[0], 'Active');
   assert.equal(controller.get('statusOptions')[1], 'Awaiting External Action');
   assert.equal(controller.get('statusOptions')[2], 'Solution in Test');
-  assert.equal(controller.get('statusOptions')[3], 'Complete');
+  assert.equal(controller.get('statusOptions')[3], 'Completed');
   assert.equal(controller.get('statusOptions')[4], 'Closed');
 });
 
