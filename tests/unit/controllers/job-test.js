@@ -218,16 +218,18 @@ test('_save() method - gotoIndexOnSave true', function(assert) {
 });
 
 test('_cancel() method should rollback attributes', function(assert) {
-  assert.expect(2);
+  assert.expect(3);
   let controller = this.subject();
   controller.set('model', Ember.Object.create({
     rollbackAttributes() {
       assert.ok(true);
     }
   }));
+  controller.set('model.newProblemDescription', 'abc');
   controller.set('showEditPanel', true);
   controller._cancel();
   assert.equal(controller.get('showEditPanel'), false, `'showEditPanel' should be false`);
+  assert.equal(controller.get('model.newProblemDescription'), null, `'newProblemDescription' should be null`);
 });
 
 test('gotoIndex action', function(assert) {

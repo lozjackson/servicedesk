@@ -161,6 +161,7 @@ export default Ember.Controller.extend({
   _cancel() {
     let model = this.get('model');
     model.rollbackAttributes();
+    model.set('newProblemDescription', null);
     this._closeEditPanel();
   },
 
